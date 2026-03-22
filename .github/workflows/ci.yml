@@ -1,0 +1,27 @@
+name: Teste CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repo
+        uses: actions/checkout@v3
+
+      - name: Instalar Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Rodar app (teste)
+        run: node index.js &
+        
+      - name: Testar endpoint
+        run: curl http://localhost:3000
