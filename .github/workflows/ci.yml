@@ -1,11 +1,11 @@
-name: Teste CI
+name: CI
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  testar:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,8 +20,10 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
-      - name: Rodar app (teste)
-        run: node index.js &
-        
+      - name: Rodar app
+        run: |
+          node index.js &
+          sleep 3
+
       - name: Testar endpoint
         run: curl http://localhost:3000
